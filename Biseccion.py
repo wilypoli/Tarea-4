@@ -8,6 +8,7 @@ def f(x):
 def metodo_biseccion(f, a, b, tol=1e-2):
     # Verificamos que haya un cambio de signo en los extremos del intervalo
     if f(a) * f(b) >= 0:
+        print("El intervalo no contiene una raíz, ya que no hay un cambio de signo en sus extremos.")
         return None  # No garantiza que haya una raíz en el intervalo
 
     # Inicializamos variables
@@ -16,7 +17,7 @@ def metodo_biseccion(f, a, b, tol=1e-2):
 
     # Iteramos hasta alcanzar la precisión deseada
     while (b - a) / 2.0 > tol:
-        iter_count += 1 #Actualizar el contador de iteraciones:
+        iter_count += 1  # Actualizar el contador de iteraciones
         c = (a + b) / 2.0  # Punto medio
         fc = f(c)
         
@@ -32,7 +33,9 @@ def metodo_biseccion(f, a, b, tol=1e-2):
 
     return c, iter_count  # Retornamos la raíz aproximada y el número de iteraciones
 
-# Aplicamos el método en el intervalo [1, 3.2]
-raiz, iteraciones = metodo_biseccion(f, 1,3.2)
-print(raiz, iteraciones)
-print(f"La raiz aproximada con el metodo de biseccion con una presicion de 10*-2 es:{raiz}, ademas se lo hizo en {iteraciones} iteraciones")
+# Aplicamos el método en un intervalo que contenga la raíz
+raiz, iteraciones = metodo_biseccion(f, 3.2, 4)  # Usamos el intervalo [2, 3]
+if raiz is not None:
+    print(f"La raíz aproximada con el método de bisección con una precisión de 10^-2 es: {raiz}, obtenida en {iteraciones} iteraciones.")
+else:
+    print("No se encontró una raíz en el intervalo dado.")
